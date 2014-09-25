@@ -1,0 +1,21 @@
+{
+  "name": "duo-pin",
+  "version": "0.0.0",
+  "description": "Duo subcommand for pinning dependencies",
+  "author": "Stephen Mathieson <me@stephenmathieson.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/stephenmathieson/duo-pin.git"
+  },
+  "dependencies": {
+    "debug": "^2.0.0",
+    "stream-log": "^0.1.0"
+  },
+  "bin": {
+    "duo-pin": "pin.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT"
+}
