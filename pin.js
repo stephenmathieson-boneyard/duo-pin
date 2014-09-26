@@ -76,7 +76,7 @@ try {
  * Build `dependencies: {}`.
  */
 
-var json = { dependencies: {} };
+var dependencies = {};
 for (var component in manifest) {
   // skip components that don't start with 'components'
   if (0 != component.indexOf('components')) {
@@ -86,12 +86,22 @@ for (var component in manifest) {
   // parse/add dep
   var parsed = dependency(component);
   var str = fmt('%s@%s', parsed.component, parsed.version);
-  if (!json.dependencies[parsed.component]) {
-    json.dependencies[parsed.component] = parsed.version;
+  if (!dependencies[parsed.component]) {
+    dependencies[parsed.component] = parsed.version;
     logger.pin(str);
   } else {
     logger.dupe(str);
   }
+}
+
+/**
+ * Sort for better diffs.
+ */
+
+var components = Object.keys(dependencies).sort();
+var json = { dependencies: {} };
+for (var slug, i = 0; slug = components[i]; i++) {
+  json.dependencies[slug] = dependencies[slug];
 }
 
 /**
