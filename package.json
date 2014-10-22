@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "debug": "^2.0.0",
-    "stream-log": "^0.1.0"
+    "stream-log": "^0.2.0"
   },
   "bin": {
     "duo-pin": "pin.js"
