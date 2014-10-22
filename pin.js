@@ -85,12 +85,11 @@ for (var component in manifest) {
   }
   // parse/add dep
   var parsed = dependency(component);
-  var str = fmt('%s@%s', parsed.component, parsed.version);
   if (!dependencies[parsed.component]) {
     dependencies[parsed.component] = parsed.version;
-    logger.pin(str);
+    logger.pin('%s@%s', parsed.component, parsed.version);
   } else {
-    logger.dupe(str);
+    logger.dupe('%s@%s', parsed.component, parsed.version);
   }
 }
 
@@ -110,10 +109,10 @@ for (var slug, i = 0; slug = components[i]; i++) {
 
 var c8 = path.join(root, 'component.json');
 debug('component.json: %s', c8);
-logger.writing(fmt(
+logger.writing(
     '%d dependencies to component.json'
   , Object.keys(json.dependencies).length
-));
+);
 fs.writeFileSync(c8, JSON.stringify(json, null, 2));
 
 if (!quiet) logger.end();
