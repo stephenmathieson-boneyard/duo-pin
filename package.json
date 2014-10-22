@@ -1,6 +1,6 @@
 {
   "name": "duo-pin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Duo subcommand for pinning dependencies",
   "author": "Stephen Mathieson <me@stephenmathieson.com>",
   "repository": {
