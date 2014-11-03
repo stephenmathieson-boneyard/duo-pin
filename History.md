@@ -1,4 +1,10 @@
 
+0.1.2 / 2014-11-03
+==================
+
+  * Add a quick example/test
+  * pin: Merge existing component.json with dependencies
+
 0.1.1 / 2014-10-22
 ==================
 
