@@ -1,0 +1,11 @@
+{
+  "name": "foo",
+  "version": "1.2.3",
+  "license": "MIT",
+  "keywords": [
+    "foo",
+    "bar"
+  ],
+  "description": "waaaaay more foo",
+  "repo": "foo/bar"
+}
