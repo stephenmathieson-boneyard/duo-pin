@@ -103,12 +103,24 @@ for (var slug, i = 0; slug = components[i]; i++) {
   json.dependencies[slug] = dependencies[slug];
 }
 
+var c8 = path.join(root, 'component.json');
+debug('component.json: %s', c8);
+
+/**
+ * Merge.
+ */
+
+if (fs.existsSync(c8)) {
+  var existing = require(c8);
+  debug('merging component.json with new dependencies');
+  existing.dependencies = json.dependencies;
+  json = existing;
+}
+
 /**
  * Write.
  */
 
-var c8 = path.join(root, 'component.json');
-debug('component.json: %s', c8);
 logger.writing(
     '%d dependencies to component.json'
   , Object.keys(json.dependencies).length
