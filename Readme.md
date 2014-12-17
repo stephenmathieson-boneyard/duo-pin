@@ -3,6 +3,12 @@
 
   Duo subcommand for pinning dependencies.  Writes resolved versions to `./component.json`.
 
+## Installation
+
+```sh
+$ npm install -g duo-pin
+```
+
 ## Usage
 
 ```sh
