@@ -1,2 +1,3 @@
 node_modules/
-example/{build,components}
+example/build
+example/components

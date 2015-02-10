@@ -9,13 +9,15 @@ var Logger = require('stream-log');
 var fs = require('fs');
 var path = require('path');
 var fmt = require('util').format;
+var argv = require('minimist')(process.argv.slice(2));
+
 
 /**
- * Quiet flag.
+ * CLI flags.
  */
 
-var quiet = !!~process.argv.indexOf('-q')
-         || !!~process.argv.indexOf('--quiet');
+var quiet = argv.q || argv.quiet;
+var root = argv.root || process.cwd();
 
 /**
  * Logger.
@@ -51,22 +53,21 @@ logger.type('error', '31m', function () {
  * Resolve duo.json.
  */
 
-var root = process.cwd();
-var duo = path.join(root, 'components', 'duo.json');
+var duo = resolve('components', 'duo.json');
 
 /**
  * Read duo.json.
  */
 
-logger.reading('components/duo.json');
+logger.reading('duo.json');
 try {
   var manifest = require(duo);
 } catch (err) {
   debug(err);
   if ('MODULE_NOT_FOUND' == err.code) {
     logger.error(
-        'unable to locate components/duo.json: '
-      + 'you must run `duo` before running `duo pin`.'
+        'unable to locate duo.json: you must run `duo` '
+      + 'before running `duo pin`.'
     );
   }
   throw err;
@@ -103,7 +104,7 @@ for (var slug, i = 0; slug = components[i]; i++) {
   json.dependencies[slug] = dependencies[slug];
 }
 
-var c8 = path.join(root, 'component.json');
+var c8 = resolve('component.json');
 debug('component.json: %s', c8);
 
 /**
@@ -138,7 +139,7 @@ if (!quiet) logger.end();
  */
 
 function dependency(id) {
-  var slug = id.split('/')[1].split('@')
+  var slug = id.split('/')[1].split('@');
   var name = slug[0];
   var version = slug[1];
   var p = name.split('-');
@@ -146,4 +147,16 @@ function dependency(id) {
     component: fmt('%s/%s', p.shift(), p.join('-')),
     version: version,
   };
+}
+
+/**
+ * Resolve a file location via args.
+ */
+
+function resolve(){
+  var args = [].slice.call(arguments);
+  return path.resolve.apply(
+      path
+    , [ process.cwd(), root ].concat(args)
+  );
 }
