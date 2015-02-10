@@ -1,4 +1,10 @@
 
+0.2.0 / 2015-02-09
+==================
+
+  * pin: Add `--root` option
+  * Readme: Add installation instructions
+
 0.1.2 / 2014-11-03
 ==================
 
